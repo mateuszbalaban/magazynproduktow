@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Magazyn</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Magazyn produktów</h1>
+        <table class="table">
+            <tr>
+                <th>Nazwa</th>
+                <th>Cena</th>
+                <th>Ilość</th>
+                <th>Kod produktu</th>
+                <th>Akcje</th>
+            </tr>
+            {% for product in products %}
+            <tr>
+                <td>{{ product.nazwa }}</td>
+                <td class= "cena" >{{ product.cena }} zł</td>
+                <td>{{ product.ilosc }}</td>
+                <td>{{ product.kod_produktu }}</td>
+                <td>
+                    <form action="/usun" method="post">
+                        <input type="hidden" name="kod_produktu" value="{{ product.kod_produktu }}">
+                        <input type="number" name="ilosc_do_usuniecia" min="1" max="{{ product.ilosc }}" value="1">
+                        <button type="submit" class = "btn-dodaj">Usuń</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        <br>
+        <a href="/dodaj" class="btn-dodaj">Dodaj produkt</a>
+    </div>
+</body>
+</html>

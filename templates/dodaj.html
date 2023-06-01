@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dodaj produkt</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Dodaj produkt</h1>
+        <form action="/dodaj" method="post" class="form">
+            <label for="nazwa" class="cenalabel">NAZWA:</label>
+            <input type="text" id="nazwa" name="nazwa" required class = "cenainput">
+
+            <label for="cena" class="cenalabel">Cena:</label>
+            <input type="number" id="cena" name="cena" step="0.01" required class="cenainput">
+
+            <label for="ilosc" class="cenalabel">ILOŚĆ:</label>
+            <input type="number" id="ilosc" name="ilosc" min="1" required class ="cenainput">
+
+            <input type="submit" value="Dodaj" class="btn-dodaj">
+        </form>
+        <a href="/" class ="btn-dodaj">Powrót</a>
+    </div>
+</body>
+</html>
