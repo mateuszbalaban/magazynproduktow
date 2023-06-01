@@ -3,6 +3,7 @@ from flask import Flask, render_template, request, redirect, flash
 from pymongo import MongoClient
 from bson.objectid import ObjectId
 import random
+import csv
 
 
 #Zainicjowanie flask
@@ -83,5 +84,21 @@ def usun_potwierdzenie():
     return render_template('usun_potwierdzenie.html')
 
 
+@app.route('/export/csv')
+def export_csv():
+    products = list(collection.find())
+    if len(products) > 0:
+        keys = products[0].keys()
+        with open('produkty.csv','w',newline='') as file:
+            writer = csv.DictWriter(file,fieldnames = keys)
+            writer.writeheader()
+            writer.writerows(products)
+        flash("Dane zostały wyeksportowane do pliku csv")
+    else:
+        flash("Nie udało się wyeksportować danych do pliku csv")
+    return redirect('/')
+
+
 if __name__ == '__main__':
+    app.secret_key = 'supersecretkey'
     app.run(debug=True, port=8080)
