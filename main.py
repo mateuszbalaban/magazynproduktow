@@ -83,7 +83,7 @@ def usun_produkt():
 def usun_potwierdzenie():
     return render_template('usun_potwierdzenie.html')
 
-
+#Eksportowanie do pliku csv
 @app.route('/export/csv')
 def export_csv():
     products = list(collection.find())
