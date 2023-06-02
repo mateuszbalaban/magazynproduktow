@@ -7,6 +7,15 @@
 <body>
     <div class="container">
         <h1>Magazyn produktów</h1>
+
+        <form action="/wyszukiwarka" method="POST">
+            <input type="text" name="nazwa" placeholder="Wyszukaj produkt" class="cenainput">
+            <button type="submit" class= "btn-dodaj">Szukaj</button>
+        </form>
+        
+
+
+
         <table class="table">
             <tr>
                 <th>Nazwa</th>
@@ -36,6 +45,7 @@
         <td>
             <a href="/export/csv" class="btn-dodaj">Eksport CSV</a>
         </td>
+        <a href="{{ url_for('index') }}" class="btn-dodaj">Przejdź do strony głównej</a>
     </div>
 </body>
 </html>

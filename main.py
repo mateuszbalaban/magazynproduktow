@@ -99,6 +99,20 @@ def export_csv():
     return redirect('/')
 
 
+@app.route('/wyszukiwarka', methods=['GET', 'POST'])
+def wyszukaj_produkt():
+    if request.method == 'POST':
+        product_list = []
+        nazwa_produktu = request.form['nazwa']
+        products = list(collection.find())
+        for product in products:
+            if nazwa_produktu in product['nazwa'] or nazwa_produktu.upper() in product['nazwa']:
+                product_list.append(product)
+        
+        return render_template('index.html', products=product_list)
+    
+    return redirect('/')
+    
 if __name__ == '__main__':
     app.secret_key = 'supersecretkey'
     app.run(debug=True, port=8080)
